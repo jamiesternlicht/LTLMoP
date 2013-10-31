@@ -1,0 +1,29 @@
+
+
+"""
+=============================
+ScorbotMotionControl.py - Motion Controller
+=============================
+
+Uses simple predetermined saved locations for movement to regions
+"""
+
+import time
+
+class motionControlHandler: 
+
+	def__init__(self,pro,shared_data): 
+		
+
+		# Don't think anything has to go here for now… maybe?
+
+
+
+	def gotoRegion(self,current_reg,next_reg, last = False): 
+
+		if current_reg == next_reg and not last: 
+			# no need to move! 
+			return True
+
+		
+		
