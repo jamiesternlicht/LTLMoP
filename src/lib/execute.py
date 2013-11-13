@@ -30,6 +30,7 @@ import math
 import traceback
 from resynthesis import ExecutorResynthesisExtensions
 import globalConfig, logging
+import numpy
 
 
 ####################
@@ -116,18 +117,13 @@ class LTLMoPExecutor(object, ExecutorResynthesisExtensions):
         if rfi is None:
             rfi = self.proj.rfi
 
-        # pose = self.proj.coordmap_lab2map(self.proj.h_instance['pose'].getPose())
-        main_robot = self.proj.currentConfig.main_robot
-        if main_robot == 'Ralph':
-            # this is a HACK for Scorbot
-            # return the init_region based on the init region defined in ScorbotInit
-            init_region = self.proj.h_instance['init'][main_robot].init_region
-            region_object = self.proj.rfiold.regions[self.proj.rfiold.indexOfRegionWithName(init_region)]
-            pose = region_object.getCenter()
-        else:
-            pose = self.proj.coordmap_lab2map(self.proj.h_instance['pose'].getPose())
-
-
+        pose_before = self.proj.h_instance['pose'].getPose()
+        logging.debug("POSE BEFORE: {}".format(pose_before))
+        tm = self.proj.currentConfig.getRobotByName(self.proj.currentConfig.main_robot).calibrationMatrix
+        logging.debug(tm)
+        pose = self.proj.coordmap_lab2map(pose_before)
+        logging.debug("POSE AFTER: {}".format(pose))
+        logging.debug("robert wants: {}".format(tm*numpy.mat([pose_before[0], pose_before[1], 1]).T))
 
         region = next((i for i, r in enumerate(rfi.regions) if r.name.lower() != "boundary" and \
                         r.objectContainsPoint(*pose)), None)
@@ -398,7 +394,7 @@ def execute_main(listen_port=None, spec_file=None, aut_file=None, show_gui=False
     logging.info("Waiting for XML-RPC server to shut down...")
     xmlrpc_server.shutdown()
     XMLRPCServerThread.join()
-    # logging.info("XML-RPC server shutdown complete.  Goodbye.")
+    logging.info("XML-RPC server shutdown complete.  Goodbye.")
 
 
 ### Command-line argument parsing ###

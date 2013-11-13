@@ -12,42 +12,6 @@ Obstacles: # Names of regions to treat as obstacles
 Regions: # Stored as JSON string
 [
     {
-        "name": "Boundary", 
-        "color": [
-            255, 
-            255, 
-            0
-        ], 
-        "height": 0.0, 
-        "position": [
-            12.0, 
-            41.0
-        ], 
-        "type": "rect", 
-        "size": [
-            712.0, 
-            450.0
-        ]
-    }, 
-    {
-        "name": "T4", 
-        "color": [
-            0, 
-            0, 
-            255
-        ], 
-        "height": 0.0, 
-        "position": [
-            19.0, 
-            205.0
-        ], 
-        "type": "rect", 
-        "size": [
-            187.0, 
-            161.0
-        ]
-    }, 
-    {
         "name": "T3", 
         "color": [
             255, 
@@ -56,49 +20,85 @@ Regions: # Stored as JSON string
         ], 
         "height": 0.0, 
         "position": [
-            399.0, 
-            283.0
+            384.0, 
+            310.0
         ], 
         "type": "rect", 
         "size": [
-            189.0, 
-            168.0
+            154.0, 
+            154.0
         ]
     }, 
     {
         "name": "T2", 
         "color": [
-            0, 
-            0, 
+            82, 
+            224, 
             255
         ], 
         "height": 0.0, 
         "position": [
-            524.0, 
-            81.0
+            539.0, 
+            93.0
         ], 
         "type": "rect", 
         "size": [
-            169.0, 
-            166.0
+            154.0, 
+            154.0
+        ]
+    }, 
+    {
+        "name": "T4", 
+        "color": [
+            74, 
+            145, 
+            255
+        ], 
+        "height": 0.0, 
+        "position": [
+            51.0, 
+            192.0
+        ], 
+        "type": "rect", 
+        "size": [
+            154.0, 
+            154.0
         ]
     }, 
     {
         "name": "T1", 
         "color": [
             255, 
-            0, 
-            255
+            130, 
+            200
         ], 
         "height": 0.0, 
         "position": [
-            257.0, 
-            80.0
+            284.0, 
+            91.0
         ], 
         "type": "rect", 
         "size": [
-            189.0, 
-            168.0
+            154.0, 
+            154.0
+        ]
+    }, 
+    {
+        "name": "Boundary", 
+        "color": [
+            255, 
+            255, 
+            0
+        ], 
+        "height": 0.0, 
+        "position": [
+            7.0, 
+            3.0
+        ], 
+        "type": "rect", 
+        "size": [
+            857.0, 
+            720.0
         ]
     }
 ]

@@ -30,10 +30,10 @@ Sensors: # List of sensor propositions and their state (enabled = 1, disabled = 
 
 RegionMapping: # Mapping between region names and their decomposed counterparts
 T4 = p2
-T1 = p5
+others = p1
 T2 = p4
 T3 = p3
-others = p1
+T1 = p5
 
 Spec: # Specification in structured English
 go to T1
@@ -43,6 +43,6 @@ go to T4
 go to T3
 go to T4
 
-if you are in T1 or T2 or T3 then do Lower_Close_Raise
-if you are in T4 then do Open
+# if you are in T1 or T2 or T3 then do Lower_Close_Raise
+# if you are in T4 then do Open
 

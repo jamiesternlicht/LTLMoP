@@ -2,7 +2,7 @@ DriveHandler: # Robot default drive handler with default argument values
 ScorbotDrive()
 
 InitHandler: # Robot default init handler with default argument values
-ScorbotInit(port ='/dev/ttyUSB0')
+ScorbotInit(port ='/dev/tty.usbserial-A1001aew')
 
 LocomotionCommandHandler: # Robot default locomotion command handler with default argument values
 ScorbotLocomotionCommand()
@@ -11,8 +11,7 @@ MotionControlHandler: # Robot default motion control handler with default argume
 ScorbotMotionControl()
 
 PoseHandler: # Robot default pose handler with default argument values
-#viconPose(host='10.0.0.102',port=800,x_VICON_name="Nao:Nao <t-X>",y_VICON_name="Nao:Nao <t-Y>",theta_VICON_name="Nao:Nao <a-Z>")
-scorbotPose()
+ScorbotPose()
 
 RobotName: # Robot Name
 Ralph
@@ -25,3 +24,9 @@ ScorbotSensor()
 
 ActuatorHandler: # Robot default actuator handler with default argument values
 ScorbotActuator()
+
+CalibrationMatrix:
+array([[ 1, 0, 0],
+       [ 0, 1, 0],
+       [ 0, 0, 1]])
+
