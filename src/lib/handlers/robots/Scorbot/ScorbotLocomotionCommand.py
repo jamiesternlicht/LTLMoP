@@ -23,7 +23,8 @@ class locomotionCommandHandler:
     def sendCommand(self, cmd): 
         # MAKE COMMANDS 
         try:
-            self.scorbotSer.write(cmd)
+            self.scorbotSer.write(cmd) # Writes movement command to serial port.
+            # This command comes from ScorbotDrive
         except: 
             print "(LOCO) ERROR: Didn't perform movement" 
             return

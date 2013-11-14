@@ -19,4 +19,4 @@ class driveHandler():
 
     def setVelocity(self, cmd, optional_cmd=None):
         if optional_cmd == None:
-            self.loco.sendCommand(cmd)
+            self.loco.sendCommand(cmd) # Sends command to locomotionCommand

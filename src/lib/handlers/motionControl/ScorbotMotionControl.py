@@ -16,6 +16,7 @@ class motionControlHandler:
         self.drive_handler = proj.h_instance['drive']
         self.system_print = False
         self.proj = proj
+        self.pose_handler = proj.h_instance['pose'] # Have pose, to verify reached destination
 
     def gotoRegion(self,current_reg,next_reg, last = False): 
 
@@ -31,6 +32,8 @@ class motionControlHandler:
         else: 
             transFace = None
 
+        # Finds point it next wants to go to, sets controller. 
+        # Currently this is region names, but in the future will be changed to offset values.
         self.drive_handler.setVelocity("move "+str(self.proj.rfi.regions[next_reg].name)+"\r") 
         time.sleep(3)
         return True

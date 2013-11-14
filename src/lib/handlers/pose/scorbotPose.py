@@ -35,15 +35,20 @@ class poseHandler:
         print "Pose is here"
 
         self.scorbotSer.flush()
-        self.scorbotSer.write('here pose\r')
-        self.scorbotSer.write('listpv pose\r')
-
+        
+        self.scorbotSer.write('here pose\r') # Setting Pose
+        self.scorbotSer.write('listpv pose\r') # Listing Pose
+        
+        
         if self.starting:
-            time.sleep(5)
+            time.sleep(.5)
+            print "This is checking whether this turns OFF"
             self.scorbotSer.write('here pose\r')
             self.scorbotSer.write('listpv pose\r')
-            self.scorbotSer.starting = False
-
+            print "BEFORE: ", (self.starting)
+            #self.starting = False
+            print "AFTER: ", (self.starting)
+            
 
         gotPose = False
         for i in range(50):
@@ -51,27 +56,22 @@ class poseHandler:
             if line == "":
                 continue
 
-            print "line: ", i
-            print line
+            # print "line: ", i
+            # print line
 
-            if line[0][0] == "X":
+            if line[0][0] == "X": # Finding Position line in XYZPR instead of Joints (1-5)
                 gotPose = True
                 break;
-
-        print "No more waiting!"
-
-        #return array([1,1,1])
 
         if not gotPose:
             return array([])
 
-        fullpose = map(int, re.findall(r'-?\d+', line))
-        pose = fullpose[:3]
+        fullpose = map(int, re.findall(r'-?\d+', line)) # This recieves X,Y,Z,Pitch,Roll
+        pose = fullpose[:3] # This limits the pose communication to X,Y,Z 
 
-        print "fullpose: ", fullpose
-        print "pose: ", pose 
+        print "Pose: ", pose 
 
-        return array(pose).astype(float)[:2]
+        return array(pose).astype(float) #[:2]
 
 
 
