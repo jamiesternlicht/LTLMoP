@@ -118,13 +118,11 @@ class LTLMoPExecutor(object, ExecutorResynthesisExtensions):
             rfi = self.proj.rfi
 
         pose_before = self.proj.h_instance['pose'].getPose()
-        logging.debug("POSE BEFORE: {}".format(pose_before))
-        tm = self.proj.currentConfig.getRobotByName(self.proj.currentConfig.main_robot).calibrationMatrix
-        logging.debug(tm)
-        pose = self.proj.coordmap_lab2map(pose_before)
-        logging.debug("POSE AFTER: {}".format(pose))
-        logging.debug("robert wants: {}".format(tm*numpy.mat([pose_before[0], pose_before[1], 1]).T))
 
+        tm = self.proj.currentConfig.getRobotByName(self.proj.currentConfig.main_robot).calibrationMatrix
+        
+        pose = self.proj.coordmap_lab2map(pose_before)
+        
         region = next((i for i, r in enumerate(rfi.regions) if r.name.lower() != "boundary" and \
                         r.objectContainsPoint(*pose)), None)
  
