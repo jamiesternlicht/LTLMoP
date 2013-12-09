@@ -10,7 +10,7 @@ Get data from serial
 
 
 from numpy import *
-import time
+import logging, time
 import serial 
 import re
 
@@ -27,54 +27,41 @@ class poseHandler:
             return
 
         self.starting = True
+        self.lastPose = self.getPose()
 
         pass
     def getPose(self, cached=False):
-        """ No return for now """   
-        
-        print "Pose is here"
+        """ Pose returned from encoders on Scorbot """   
+        if cached: 
+            return self.lastPose
 
-        self.scorbotSer.flush()
+        starttime = time.clock()
+        #logging.debug("Pose start")
+        self.scorbotSer.flushInput()    
         
         self.scorbotSer.write('here pose\r') # Setting Pose
+        self.scorbotSer.readline()
+        self.scorbotSer.readline()
         self.scorbotSer.write('listpv pose\r') # Listing Pose
+        self.scorbotSer.readline()
+        self.scorbotSer.readline()
+        self.scorbotSer.readline()
+        line = self.scorbotSer.readline()
         
-        
-        if self.starting:
-            time.sleep(.5)
-            print "This is checking whether this turns OFF"
-            self.scorbotSer.write('here pose\r')
-            self.scorbotSer.write('listpv pose\r')
-            print "BEFORE: ", (self.starting)
-            #self.starting = False
-            print "AFTER: ", (self.starting)
-            
-
-        gotPose = False
-        for i in range(50):
-            line = self.scorbotSer.readline()[1:]
-            if line == "":
-                continue
-
-            # print "line: ", i
-            # print line
-
-            if line[0][0] == "X": # Finding Position line in XYZPR instead of Joints (1-5)
-                gotPose = True
-                break;
-
-        if not gotPose:
-            return array([])
-
         fullpose = map(int, re.findall(r'-?\d+', line)) # This recieves X,Y,Z,Pitch,Roll
         pose = fullpose[:3] # This limits the pose communication to X,Y,Z 
 
-        print "Pose: ", pose 
+        #logging.debug("Pose end")
+        #print "Pose: ", pose 
 
-        return array(pose).astype(float) #[:2]
+        tottime = (time.clock()-starttime)
+        #print "This is the ammount of time for pose: {}s".format(tottime)
+        
+        self.lastPose = array(pose).astype(float)
 
-
-
+        return self.lastPose #[:2]
+        
+        #return array([3478,-3051,0]) # 1556
 
 
 
