@@ -5,14 +5,14 @@ ScorbotInit.py -- Scorbot Initialization Handler
 
 """
 
-import time
 import serial
+import logging 
 
-class initHandler:
+class ScorbotInitHandler:
 
-    def __init__(self, proj, init_region, port ='/dev/ttyUSB0'): 
+    def __init__(self, proj, init_region, port): 
 
-	"""
+        """
         Initialization handler for Scorbot robot. 
 
         init_region (region): The name of the region where the robot starts
@@ -22,18 +22,24 @@ class initHandler:
         try:
             self.scorbotSer = serial.Serial(port)
         except Exception as e: 
-            print("(INIT) ERROR: Couldn't connect to Scorbot") 
+            logging.error("(INIT) ERROR: Couldn't connect to Scorbot") 
             print (e)
             return
-        self.init_region = init_region
+        self.init_region = init_region 
+        #Initial region is set by user in LTLMoP init config... maybe...
 
-    def Stop(self): 
-        print "(INIT) Shutting down serial port!" 
+    def _stop(self): 
+        logging.info("(INIT) Shutting down serial port!")
         self.scorbotSer.close()
 
     def getSharedData(self):
         return {"ScorbotSer" : self.scorbotSer}
 
+    def sendCommand(cmd, num_lines):
+
+        self.scorbotSer.write(cmd)
+        for x in range(num_lines): 
+            self.scorbotSer.readline()
 
 
  
