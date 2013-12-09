@@ -9,21 +9,6 @@ ser.flush()
 ser.write('here pose\r')
 ser.write('listpv pose\r')
 
-"""
-line = ser.readline()
-line2 = ser.readline()
-line3 = ser.readline()
-line4 = ser.readline()
-line5 = ser.readline()
-line6 = ser.readline()
-
-print "lines:"
-print line 
-print line2 
-print line3
-print line4 
-"""
-
 gotPose = False
 while not gotPose:
 #for i in range(10):
