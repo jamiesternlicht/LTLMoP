@@ -34,6 +34,11 @@ class ScorbotActuatorHandler:
             return 
 
         if int(actuatorVal) == 1:
+
+            time.sleep(1)
+            pose = self.pose_handler.getPose()
+            self._gotoCenter(pose)
+
             self.scorbotSer.write("move goal\r") 
             self.scorbotSer.read()
             self.scorbotSer.read()
@@ -53,50 +58,16 @@ class ScorbotActuatorHandler:
 
         if int(actuatorVal) == 1: 
 
+            time.sleep(1)
             pose = self.pose_handler.getPose()
-            current_region = self._getCurrentRegionFromPose(pose[:2])
-            target = self.proj.coordmap_map2lab(current_region.getCenter())
-
-            print "This is the center: ", target
-
-            Xmove = target[0] - pose[0]
-            Ymove = target[1] - pose[1]
-
-            print "Xmove ", Xmove 
-            print "Ymove ", Ymove 
-
-            Zmove = 0 # (Z direction)
-            Pmove = 0 # (Pitch)
-            Rmove = 0 # (Roll)
-
-            self.scorbotSer.flushInput()
-            self.scorbotSer.write('teachr oset\r')
-            self.scorbotSer.readline() 
-            self.scorbotSer.write('%d' % Xmove + '\r') 
-            line = self.scorbotSer.readline()
-            print line
-            self.scorbotSer.write('%d' % Ymove + '\r')
-            line = self.scorbotSer.readline()
-            print line
-            self.scorbotSer.write('%d' % Zmove + '\r')
-            self.scorbotSer.readline()
-            self.scorbotSer.write('%d' % Pmove + '\r')
-            self.scorbotSer.readline()
-            self.scorbotSer.write('%d' % Rmove + '\r')
-            self.scorbotSer.readline()
-            self.scorbotSer.readline()
-
-            self.scorbotSer.write('move oset\r') 
-            self.scorbotSer.readline()
-            self.scorbotSer.readline()
-            time.sleep(5)
+            self._gotoCenter(pose)
 
             print "Passing move oset"
 
             self.scorbotSer.write("move O0\r")
             self.scorbotSer.read()
             self.scorbotSer.read()
-            time.sleep(5)
+            time.sleep(6)
             print "Passing drop down"
             self.scorbotSer.write("close\r")
             self.scorbotSer.read()
@@ -124,3 +95,40 @@ class ScorbotActuatorHandler:
             logging.warning("Pose of {} not inside any region!".format(pose))
 
         return region
+
+    def _gotoCenter(self,pose):
+
+        print "I am going to center"
+
+        current_region = self._getCurrentRegionFromPose(pose[:2])
+        target = self.proj.coordmap_map2lab(current_region.getCenter())
+
+        Xmove = target[0] - pose[0]
+        Ymove = target[1] - pose[1]
+
+        print "Xmove ", Xmove 
+        print "Ymove ", Ymove 
+
+        Zmove = 0 # (Z direction)
+        Pmove = 0 # (Pitch)
+        Rmove = 0 # (Roll)
+
+        self.scorbotSer.flushInput()
+        self.scorbotSer.write('teachr oset\r')
+        self.scorbotSer.readline() 
+        self.scorbotSer.write('%d' % Xmove + '\r') 
+        self.scorbotSer.readline()
+        self.scorbotSer.write('%d' % Ymove + '\r')
+        self.scorbotSer.readline()
+        self.scorbotSer.write('%d' % Zmove + '\r')
+        self.scorbotSer.readline()
+        self.scorbotSer.write('%d' % Pmove + '\r')
+        self.scorbotSer.readline()
+        self.scorbotSer.write('%d' % Rmove + '\r')
+        self.scorbotSer.readline()
+        self.scorbotSer.readline()
+
+        self.scorbotSer.write('move oset\r') 
+        self.scorbotSer.readline()
+        self.scorbotSer.readline()
+        time.sleep(3)
