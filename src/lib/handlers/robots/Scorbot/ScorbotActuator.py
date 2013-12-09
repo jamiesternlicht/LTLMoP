@@ -13,8 +13,11 @@ class ScorbotActuatorHandler:
     
     def __init__(self, proj, shared_data): 
 
+        self.proj = proj
+
         self.pose_handler = proj.h_instance['pose']   
         self.drive_handler = proj.h_instance['drive']
+
 
         try: 
             self.scorbotSer = shared_data["ScorbotSer"]
@@ -51,30 +54,14 @@ class ScorbotActuatorHandler:
         if int(actuatorVal) == 1: 
 
             pose = self.pose_handler.getPose()
-            pose = pose[:2]
-            region1 = [2590, -3709]
-            region2 = [1114, -4581]
-            region3 = [1420, -3603]
+            current_region = self._getCurrentRegionFromPose(pose[:2])
+            target = self.proj.coordmap_map2lab(current_region.getCenter())
 
-            dist1 = math.hypot(pose[0] - region1[0], pose[1] - region1[1])
-            dist2 = math.hypot(pose[0] - region2[0], pose[1] - region2[1])
-            dist3 = math.hypot(pose[0] - region3[0], pose[1] - region3[1])
+            print "This is the center: ", target
 
-            for x in range(0,3): 
-                goal = dist1 
-                oset = region1 - pose
+            Xmove = target[0] - pose[0]
+            Ymove = target[1] - pose[1]
 
-                if dist2 < goal: 
-                    goal = dist2
-                    oset = region2 - pose
-
-                if dist3 < goal: 
-                    goal = dist3
-                    oset = region3 - pose
-
-            print "This is region 1 and current pose", region1, pose
-            Xmove = oset[0]
-            Ymove = oset[1]
             print "Xmove ", Xmove 
             print "Ymove ", Ymove 
 
@@ -121,3 +108,19 @@ class ScorbotActuatorHandler:
             self.scorbotSer.read()
             time.sleep(3)
             print "Passing raise up"
+
+
+    def _getCurrentRegionFromPose(self, pose):
+        rfi = self.proj.rfi
+
+        tm = self.proj.currentConfig.getRobotByName(self.proj.currentConfig.main_robot).calibrationMatrix
+        
+        pose = self.proj.coordmap_lab2map(pose)
+        
+        region = next((r for i, r in enumerate(rfi.regions) if r.name.lower() != "boundary" and \
+                        r.objectContainsPoint(*pose)), None)
+ 
+        if region is None:
+            logging.warning("Pose of {} not inside any region!".format(pose))
+
+        return region
