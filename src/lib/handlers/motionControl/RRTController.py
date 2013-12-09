@@ -104,12 +104,13 @@ class motionControlHandler:
         #  self.timestep  : number of linear segments to break the curve into for calculation of x, y position
         #  self.step_size  : the length of each step for connection to goal point
         #  self.velocity   : Velocity of the robot in m/s in control space (m/s)
+        self.system = 6
         if self.system  == 1:
             self.radius = 5
             self.step_size  = 25
             self.timeStep = 10
             self.velocity = 2    # 1.5
-        if  self.system == 2:
+        elif  self.system == 2:
             self.radius = 5
             self.step_size  = 15
             self.timeStep = 10
@@ -130,6 +131,11 @@ class motionControlHandler:
             self.step_size  = 0.2      #set the step_size for points be 1/5 of the norm  ORIGINAL = 0.4
             self.timeStep = 5
             self.velocity  = 0.05
+        elif self.system == 6:
+            self.radius = 10
+            self.step_size = 300
+            self.timeStep = 2
+            self.velocity = 100
 
 
         # Operate_system (int): Which operating system is used for execution.
@@ -193,7 +199,7 @@ class motionControlHandler:
                 print "Current Region is " + str(self.proj.rfi.regions[current_reg].name)
 
             #set to zero velocity before tree is generated
-            self.drive_handler.setVelocity(0, 0)
+            self.drive_handler.nextMove([0, 0])
             if last:
                 transFace = None
             else:
@@ -249,13 +255,13 @@ class motionControlHandler:
             """
 
         # Run algorithm to find a velocity vector (global frame) to take the robot to the next region
-        self.Velocity = self.getVelocity([pose[0], pose[1]], self.RRT_V,self.RRT_E)
-        #self.Node = self.getNode([pose[0], pose[1]], self.RRT_V,self.RRT_E)
+        #self.Velocity = self.getVelocity([pose[0], pose[1]], self.RRT_V,self.RRT_E)
+        self.Node = self.getNode([pose[0], pose[1]], self.RRT_V,self.RRT_E)
         self.previous_next_reg = next_reg
 
         # Pass this desired velocity on to the drive handler
-        self.drive_handler.setVelocity(self.Velocity[0,0], self.Velocity[1,0], pose[2])
-        #self.drive_handler.setVelocity(self.Node[0,0], self.Node[1,0], pose[2])
+        #self.drive_handler.setVelocity(self.Velocity[0,0], self.Velocity[1,0], pose[2])
+        self.drive_handler.nextMove([self.Node[0,0], self.Node[1,0]])
         RobotPoly = Polygon.Shapes.Circle(self.radius,(pose[0],pose[1]))
 
         # check if robot is inside the current region
