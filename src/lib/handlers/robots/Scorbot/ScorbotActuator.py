@@ -67,7 +67,7 @@ class ScorbotActuatorHandler:
             self.scorbotSer.write("move O0\r")
             self.scorbotSer.read()
             self.scorbotSer.read()
-            time.sleep(6)
+            time.sleep(7)
             print "Passing drop down"
             self.scorbotSer.write("close\r")
             self.scorbotSer.read()

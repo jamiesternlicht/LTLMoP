@@ -31,7 +31,7 @@ Ring, 1
 ======== SPECIFICATION ========
 
 RegionMapping: # Mapping between region names and their decomposed counterparts
-others = p6, p7, p8, p9, p10
+others = p6, p7, p8, p9, p10, p11
 RingRegion1 = p4
 Goal = p5
 RingRegion3 = p2
