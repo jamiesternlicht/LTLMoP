@@ -35,18 +35,14 @@ class ScorbotActuatorHandler:
 
         if int(actuatorVal) == 1:
 
-            time.sleep(1)
+            time.sleep(1) # Sleep is used to ensure that actuator gets pose before proceeding
             pose = self.pose_handler.getPose()
             self._gotoCenter(pose)
 
-            self.scorbotSer.write("move goal\r") 
-            self.scorbotSer.read()
-            self.scorbotSer.read()
-            time.sleep(3)
             self.scorbotSer.write("open\r") 
             self.scorbotSer.read()
-            self.scorbotSer.read() #time.sleep(2) # COMMENT SLEEP IF STILL GOING TO USE
-            time.sleep(3)
+            self.scorbotSer.read() 
+            time.sleep(3) #This sleep is here to ensure that it completes opening before proceeding
 
     def pick_up(self,actuatorVal, initial=False): 
         """
@@ -62,23 +58,22 @@ class ScorbotActuatorHandler:
             pose = self.pose_handler.getPose()
             self._gotoCenter(pose)
 
-            print "Passing move oset"
 
             self.scorbotSer.write("move O0\r")
             self.scorbotSer.read()
             self.scorbotSer.read()
-            time.sleep(7)
-            print "Passing drop down"
+            time.sleep(7) # This sleep is here to ensure the gripper fully drops before closing
+
             self.scorbotSer.write("close\r")
             self.scorbotSer.read()
             self.scorbotSer.read()
-            time.sleep(3)
-            print "Passing close"
+            time.sleep(3) # This sleep is here to ensure the gripper fully closes before raising 
+
             self.scorbotSer.write("move O1\r")
             self.scorbotSer.read()
             self.scorbotSer.read()
-            time.sleep(3)
-            print "Passing raise up"
+            time.sleep(3) # This sleep is here to ensure the gripper fully raises before beginning to navigate again
+
 
 
     def _getCurrentRegionFromPose(self, pose):
@@ -131,4 +126,4 @@ class ScorbotActuatorHandler:
         self.scorbotSer.write('move oset\r') 
         self.scorbotSer.readline()
         self.scorbotSer.readline()
-        time.sleep(3)
+        time.sleep(3) #This sleep is here to ensure that the Scorbot moves to the centroid

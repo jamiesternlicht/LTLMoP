@@ -1,0 +1,306 @@
+# This is a region definition file for the LTLMoP toolkit.
+# Format details are described at the beginning of each section below.
+# Note that all values are separated by *tabs*.
+
+Background: # Relative path of background image file
+None
+
+CalibrationPoints: # Vertices to use for map calibration: (vertex_region_name, vertex_index)
+
+Obstacles: # Names of regions to treat as obstacles
+
+Regions: # Stored as JSON string
+[
+    {
+        "name": "Boundary", 
+        "color": [
+            255, 
+            128, 
+            0
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                373.0
+            ], 
+            [
+                0.0, 
+                307.0
+            ], 
+            [
+                0.0, 
+                255.0
+            ], 
+            [
+                0.0, 
+                219.0
+            ], 
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                233.0, 
+                0.0
+            ], 
+            [
+                387.0, 
+                0.0
+            ], 
+            [
+                488.0, 
+                0.0
+            ], 
+            [
+                643.0, 
+                0.0
+            ], 
+            [
+                643.0, 
+                154.0
+            ], 
+            [
+                643.0, 
+                528.0
+            ], 
+            [
+                488.0, 
+                528.0
+            ], 
+            [
+                332.0, 
+                528.0
+            ], 
+            [
+                0.0, 
+                528.0
+            ]
+        ], 
+        "position": [
+            51.0, 
+            91.0
+        ], 
+        "type": "poly", 
+        "size": [
+            643.0, 
+            528.0
+        ]
+    }, 
+    {
+        "name": "RingRegion3", 
+        "color": [
+            127, 
+            0, 
+            127
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                126.0
+            ], 
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                1.0, 
+                0.0
+            ], 
+            [
+                155.0, 
+                0.0
+            ], 
+            [
+                156.0, 
+                0.0
+            ], 
+            [
+                156.0, 
+                1.0
+            ], 
+            [
+                156.0, 
+                37.0
+            ], 
+            [
+                156.0, 
+                89.0
+            ], 
+            [
+                156.0, 
+                155.0
+            ], 
+            [
+                0.0, 
+                155.0
+            ]
+        ], 
+        "position": [
+            383.0, 
+            464.0
+        ], 
+        "type": "poly", 
+        "size": [
+            156.0, 
+            155.0
+        ]
+    }, 
+    {
+        "name": "Goal", 
+        "color": [
+            0, 
+            255, 
+            0
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                88.0
+            ], 
+            [
+                0.0, 
+                36.0
+            ], 
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                154.0, 
+                0.0
+            ], 
+            [
+                154.0, 
+                36.0
+            ], 
+            [
+                154.0, 
+                88.0
+            ], 
+            [
+                154.0, 
+                154.0
+            ], 
+            [
+                0.0, 
+                154.0
+            ]
+        ], 
+        "position": [
+            51.0, 
+            310.0
+        ], 
+        "type": "poly", 
+        "size": [
+            154.0, 
+            154.0
+        ]
+    }, 
+    {
+        "name": "RingRegion2", 
+        "color": [
+            0, 
+            0, 
+            255
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                2.0
+            ], 
+            [
+                0.0, 
+                1.0
+            ], 
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                155.0, 
+                0.0
+            ], 
+            [
+                155.0, 
+                154.0
+            ], 
+            [
+                1.0, 
+                154.0
+            ], 
+            [
+                0.0, 
+                154.0
+            ]
+        ], 
+        "position": [
+            539.0, 
+            91.0
+        ], 
+        "type": "poly", 
+        "size": [
+            155.0, 
+            154.0
+        ]
+    }, 
+    {
+        "name": "RingRegion1", 
+        "color": [
+            255, 
+            130, 
+            200
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                101.0
+            ], 
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                154.0, 
+                0.0
+            ], 
+            [
+                154.0, 
+                154.0
+            ], 
+            [
+                100.0, 
+                154.0
+            ], 
+            [
+                0.0, 
+                154.0
+            ]
+        ], 
+        "position": [
+            284.0, 
+            91.0
+        ], 
+        "type": "poly", 
+        "size": [
+            154.0, 
+            154.0
+        ]
+    }
+]
+
+Transitions: # Region 1 Name, Region 2 Name, Bidirectional transition faces (face1_x1, face1_y1, face1_x2, face1_y2, face2_x1, ...)
+Boundary	RingRegion3	383.0	619.0	539.0	619.0
+Boundary	Goal	51.0	464.0	51.0	398.0	51.0	346.0	51.0	398.0	51.0	346.0	51.0	310.0
+Boundary	RingRegion2	694.0	91.0	694.0	245.0	694.0	91.0	539.0	91.0
+Boundary	RingRegion1	438.0	91.0	284.0	91.0
+
