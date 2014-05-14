@@ -1,0 +1,319 @@
+# This is a region definition file for the LTLMoP toolkit.
+# Format details are described at the beginning of each section below.
+# Note that all values are separated by *tabs*.
+
+Background: # Relative path of background image file
+None
+
+CalibrationPoints: # Vertices to use for map calibration: (vertex_region_name, vertex_index)
+
+Obstacles: # Names of regions to treat as obstacles
+
+Regions: # Stored as JSON string
+[
+    {
+        "name": "Space2", 
+        "color": [
+            0, 
+            255, 
+            64
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                248.0, 
+                0.0
+            ], 
+            [
+                248.0, 
+                245.0
+            ], 
+            [
+                93.0, 
+                245.0
+            ], 
+            [
+                0.0, 
+                245.0
+            ]
+        ], 
+        "position": [
+            446.0, 
+            374.0
+        ], 
+        "type": "poly", 
+        "size": [
+            248.0, 
+            245.0
+        ]
+    }, 
+    {
+        "name": "Space1", 
+        "color": [
+            255, 
+            255, 
+            128
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                93.0, 
+                0.0
+            ], 
+            [
+                248.0, 
+                0.0
+            ], 
+            [
+                248.0, 
+                154.0
+            ], 
+            [
+                248.0, 
+                227.0
+            ], 
+            [
+                0.0, 
+                227.0
+            ]
+        ], 
+        "position": [
+            446.0, 
+            91.0
+        ], 
+        "type": "poly", 
+        "size": [
+            248.0, 
+            227.0
+        ]
+    }, 
+    {
+        "name": "Recycling", 
+        "color": [
+            0, 
+            128, 
+            192
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                255.0
+            ], 
+            [
+                0.0, 
+                219.0
+            ], 
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                188.0, 
+                0.0
+            ], 
+            [
+                188.0, 
+                261.0
+            ], 
+            [
+                0.0, 
+                261.0
+            ]
+        ], 
+        "position": [
+            51.0, 
+            91.0
+        ], 
+        "type": "poly", 
+        "size": [
+            188.0, 
+            261.0
+        ]
+    }, 
+    {
+        "name": "Trash", 
+        "color": [
+            255, 
+            0, 
+            0
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                112.0
+            ], 
+            [
+                0.0, 
+                46.0
+            ], 
+            [
+                0.0, 
+                25.0
+            ], 
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                188.0, 
+                0.0
+            ], 
+            [
+                188.0, 
+                267.0
+            ], 
+            [
+                178.0, 
+                267.0
+            ], 
+            [
+                0.0, 
+                267.0
+            ]
+        ], 
+        "position": [
+            51.0, 
+            352.0
+        ], 
+        "type": "poly", 
+        "size": [
+            188.0, 
+            267.0
+        ]
+    }, 
+    {
+        "name": "Boundary", 
+        "color": [
+            255, 
+            128, 
+            0
+        ], 
+        "holeList": [], 
+        "height": 0.0, 
+        "points": [
+            [
+                0.0, 
+                373.0
+            ], 
+            [
+                0.0, 
+                307.0
+            ], 
+            [
+                0.0, 
+                286.0
+            ], 
+            [
+                0.0, 
+                261.0
+            ], 
+            [
+                0.0, 
+                255.0
+            ], 
+            [
+                0.0, 
+                219.0
+            ], 
+            [
+                0.0, 
+                0.0
+            ], 
+            [
+                188.0, 
+                0.0
+            ], 
+            [
+                233.0, 
+                0.0
+            ], 
+            [
+                387.0, 
+                0.0
+            ], 
+            [
+                395.0, 
+                0.0
+            ], 
+            [
+                488.0, 
+                0.0
+            ], 
+            [
+                643.0, 
+                0.0
+            ], 
+            [
+                643.0, 
+                154.0
+            ], 
+            [
+                643.0, 
+                227.0
+            ], 
+            [
+                643.0, 
+                283.0
+            ], 
+            [
+                643.0, 
+                528.0
+            ], 
+            [
+                488.0, 
+                528.0
+            ], 
+            [
+                395.0, 
+                528.0
+            ], 
+            [
+                332.0, 
+                528.0
+            ], 
+            [
+                188.0, 
+                528.0
+            ], 
+            [
+                178.0, 
+                528.0
+            ], 
+            [
+                0.0, 
+                528.0
+            ]
+        ], 
+        "position": [
+            51.0, 
+            91.0
+        ], 
+        "type": "poly", 
+        "size": [
+            643.0, 
+            528.0
+        ]
+    }
+]
+
+Transitions: # Region 1 Name, Region 2 Name, Bidirectional transition faces (face1_x1, face1_y1, face1_x2, face1_y2, face2_x1, ...)
+Space2	Boundary	694.0	619.0	539.0	619.0	694.0	619.0	694.0	374.0	446.0	619.0	539.0	619.0
+Space1	Boundary	446.0	91.0	539.0	91.0	694.0	245.0	694.0	318.0	694.0	91.0	539.0	91.0	694.0	91.0	694.0	245.0
+Recycling	Trash	51.0	352.0	239.0	352.0
+Recycling	Boundary	51.0	91.0	51.0	310.0	239.0	91.0	51.0	91.0	51.0	352.0	51.0	346.0	51.0	346.0	51.0	310.0
+Trash	Boundary	239.0	619.0	229.0	619.0	51.0	377.0	51.0	398.0	51.0	352.0	51.0	377.0	51.0	619.0	229.0	619.0	51.0	464.0	51.0	398.0	51.0	464.0	51.0	619.0
+
